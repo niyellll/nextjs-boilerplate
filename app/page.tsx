@@ -282,7 +282,7 @@ export default function Home() {
             >
               <img
                 src="/logo.png"
-                alt="GPro Logo”
+                alt="GPro Logo"
                 className="h-full w-full object-contain"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).style.display = "none";
