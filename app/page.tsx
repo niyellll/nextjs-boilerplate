@@ -127,25 +127,25 @@ export default function Home() {
       title: "Policy Brief — Hub Logistik Kediri 2045",
       type: "PDF",
       desc: "Ringkasan kebijakan + roadmap strategi (contoh placeholder).",
-      url: "https://example.com/kediri-policy-brief.pdf",
+      url: "https://drive.google.com/drive/folders/1Ba3bgpWW9riOLscHmWXOR7tqc1H1dLTE?usp=drive_link",
     },
     {
       title: "Peta Analitik — Bottleneck Kawasan Industri",
       type: "Peta",
       desc: "Visual zona risiko & intervensi (contoh placeholder).",
-      url: "https://example.com/peta-bottleneck.png",
+      url: "https://drive.google.com/drive/folders/1Ba3bgpWW9riOLscHmWXOR7tqc1H1dLTE?usp=drive_link",
     },
     {
       title: "Toolkit — Edukasi ISPA & Stres Kemacetan (1 halaman)",
       type: "Toolkit",
       desc: "Materi edukasi publik ringkas (contoh placeholder).",
-      url: "https://example.com/toolkit-ispa.pdf",
+      url: "https://drive.google.com/drive/folders/1Ba3bgpWW9riOLscHmWXOR7tqc1H1dLTE?usp=drive_link",
     },
     {
       title: "Deck — Evaluasi PSN & Biaya Logistik",
       type: "Slide",
       desc: "Materi presentasi untuk stakeholder (contoh placeholder).",
-      url: "https://example.com/deck-psn.pptx",
+      url: "https://drive.google.com/drive/folders/1Ba3bgpWW9riOLscHmWXOR7tqc1H1dLTE?usp=drive_link",
     },
   ];
 
