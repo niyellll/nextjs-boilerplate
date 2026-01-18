@@ -512,31 +512,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PARTNER STRIP */}
-      <section className="mx-auto max-w-6xl px-6 pt-12">
-        <div data-reveal className="gpro-reveal">
-          <div className="rounded-3xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-            <p className="text-sm font-semibold" style={{ color: textMain }}>
-              Partner / kolaborasi (bisa diisi logo organisasi)
-            </p>
-            <p className="mt-1 text-xs" style={{ color: textSub }}>
-              Kalau belum ada, ini tetap bisa tampil sebagai “Trusted by / Collaboration”.
-            </p>
+      {/* PARTNER / REFERENSI STRIP */}
+<section className="mx-auto max-w-6xl px-6 pt-12">
+  <div data-reveal className="gpro-reveal">
+    <div
+      className="rounded-3xl p-6"
+      style={{ border: `1px solid ${border}`, backgroundColor: card }}
+    >
+      <p className="text-sm font-semibold" style={{ color: textMain }}>
+        Referensi & Rujukan
+      </p>
+      <p className="mt-1 text-xs" style={{ color: textSub }}>
+        Logo berikut ditampilkan sebagai rujukan data/framework (bukan endorsement).
+      </p>
 
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
-              {["Partner A", "Partner B", "Partner C", "Partner D"].map((p) => (
-                <div
-                  key={p}
-                  className="flex items-center justify-center rounded-2xl px-4 py-6 text-sm font-semibold"
-                  style={{ border: `1px dashed ${border}`, color: textSub }}
-                >
-                  {p}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+        {[
+          { name: "McKinsey & Company", src: "/partners/mckinsey.png", href: "https://www.mckinsey.com" },
+          { name: "World Economic Forum", src: "/partners/wef.png", href: "https://www.weforum.org" },
+          { name: "International Labour Organization", src: "/partners/ilo.png", href: "https://www.ilo.org" },
+          { name: "The World Bank", src: "/partners/worldbank.png", href: "https://www.worldbank.org" },
+        ].map((p) => (
+          <a
+            key={p.name}
+            href={p.href}
+            target="_blank"
+            rel="noreferrer"
+            className="gpro-card flex items-center justify-center rounded-2xl px-4 py-6"
+            style={{
+              border: `1px solid ${border}`,
+              backgroundColor: dark ? "rgba(255,255,255,0.04)" : "#fff",
+            }}
+            title={p.name}
+          >
+            <img
+              src={p.src}
+              alt={p.name}
+              className="h-10 w-auto object-contain opacity-90 transition hover:opacity-100"
+              onError={(e) => {
+                // kalau file belum ada / salah nama → biar tidak bikin blank aneh
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* TENTANG */}
       <section id="tentang" className="mx-auto max-w-6xl px-6 pt-14 scroll-mt-24">
