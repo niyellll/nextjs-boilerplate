@@ -1,26 +1,136 @@
 @import "tailwindcss";
 
+/* =========================
+   Base theme tokens
+   ========================= */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* UI helpers */
+  --card: rgba(255, 255, 255, 0.75);
+  --border: rgba(15, 23, 42, 0.14);
+  --shadow: 0 12px 30px rgba(2, 6, 23, 0.10);
+  --shadow-soft: 0 10px 22px rgba(2, 6, 23, 0.08);
+  --radius: 24px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    --card: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.12);
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+    --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.40);
   }
+}
+
+/* =========================
+   Global base
+   ========================= */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.25);
+}
+
+/* =========================
+   Cards / hover polish
+   ========================= */
+.gpro-card {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  will-change: transform;
+}
+
+.gpro-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.gpro-card:active {
+  transform: translateY(0px);
+}
+
+/* =========================
+   Reveal on scroll
+   (pakai class: gpro-reveal + tambahkan is-visible via JS/IO)
+   ========================= */
+.gpro-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(6px);
+  transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+  will-change: opacity, transform, filter;
+}
+
+.gpro-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* =========================
+   Marquee (Partner strip berjalan)
+   ========================= */
+.gpro-marquee {
+  overflow: hidden;
+  position: relative;
+
+  /* fade edges biar keren */
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.gpro-marquee-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: gpro-marquee 22s linear infinite;
+}
+
+.gpro-marquee:hover .gpro-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes gpro-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* =========================
+   Accessibility: reduce motion
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .gpro-marquee-track {
+    animation: none !important;
+  }
+
+  .gpro-reveal,
+  .gpro-reveal.is-visible {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .gpro-card {
+    transition: none !important;
+  }
 }
