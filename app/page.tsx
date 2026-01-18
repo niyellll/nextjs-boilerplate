@@ -525,10 +525,10 @@ export default function Home() {
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
         {[
-          { name: "McKinsey & Company", src: "/public/mckinsey.png", href: "https://www.mckinsey.com" },
-          { name: "World Economic Forum", src: "/public/wef.png", href: "https://www.weforum.org" },
-          { name: "International Labour Organization", src: "/public/ilo.png", href: "https://www.ilo.org" },
-          { name: "The World Bank", src: "/public/worldbank.png", href: "https://www.worldbank.org" },
+          { name: "McKinsey & Company", src: "/mckinsey.png", href: "https://www.mckinsey.com" },
+          { name: "World Economic Forum", src: "/wef.png", href: "https://www.weforum.org" },
+          { name: "International Labour Organization", src: "/ilo.png", href: "https://www.ilo.org" },
+          { name: "The World Bank", src: "/worldbank.png", href: "https://www.worldbank.org" },
         ].map((p) => (
           <a
             key={p.name}
