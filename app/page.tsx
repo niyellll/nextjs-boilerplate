@@ -209,11 +209,18 @@ export default function Home() {
   const cn = (...s: (string | false | null | undefined)[]) => s.filter(Boolean).join(" ");
 
   const SectionTitle = ({ title, desc }: { title: string; desc?: string }) => (
-    <div className="mb-6">
-      <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">{title}</h2>
-      {desc ? <p className="mt-2 max-w-3xl text-sm text-zinc-600 dark:text-zinc-300">{desc}</p> : null}
-    </div>
-  );
+  <div className="mb-6">
+    <h2 className="text-xl font-extrabold tracking-tight" style={{ color: textMain }}>
+      {title}
+    </h2>
+    {desc ? (
+      <p className="mt-2 max-w-3xl text-sm leading-6" style={{ color: textSub }}>
+        {desc}
+      </p>
+    ) : null}
+  </div>
+);
+
 
   const chipStyle = {
     borderColor: COLORS.blue,
@@ -476,59 +483,121 @@ export default function Home() {
       </section>
 
       {/* TENTANG */}
-      <section id="tentang" className="mx-auto max-w-6xl px-6 pt-14 scroll-mt-24">
-        <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700 ease-out">
-          <SectionTitle
-            title="Tentang GPro"
-            desc="GPro berfokus pada pekerjaan yang “nyambung ke eksekusi”: merumuskan masalah, membangun opsi kebijakan, lalu mengemasnya jadi materi yang bisa dipakai pemangku kepentingan."
-          />
+      {/* TENTANG */}
+<section id="tentang" className="mx-auto max-w-6xl px-6 pt-14 scroll-mt-24">
+  <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700 ease-out">
+    <SectionTitle
+      title="Tentang GPro"
+      desc="GPro (Global Pro-eksistensi) adalah pusat kajian strategis yang membantu organisasi dan pemangku kepentingan mengubah isu rumit menjadi keputusan yang jelas. Fokus kami bukan sekadar “analisis”, tapi menyusun arah, prioritas, dan langkah eksekusi—dengan bahasa yang mudah dipahami dan output yang siap dipakai."
+    />
 
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              {
-                t: "Nilai kerja",
-                list: ["Transparan pada asumsi & sumber", "Rapi, ringkas, stakeholder-friendly", "Fokus pada langkah implementasi"],
-              },
-              {
-                t: "Untuk siapa",
-                list: ["Komunitas/NGO", "Pemerintah daerah", "Pelaku usaha & stakeholder"],
-              },
-            ].map((x) => (
-              <div key={x.t} className="rounded-2xl p-6 shadow-sm" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-                <p className="text-sm font-bold" style={{ color: textMain }}>{x.t}</p>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm" style={{ color: textSub }}>
-                  {x.list.map((li) => (
-                    <li key={li}>{li}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+    <div className="grid gap-4 md:grid-cols-3">
+      {/* Narasi utama */}
+      <div
+        className="md:col-span-2 rounded-2xl p-6 shadow-sm"
+        style={{ border: `1px solid ${border}`, backgroundColor: card }}
+      >
+        <p className="text-sm font-semibold" style={{ color: textSub }}>
+          Apa yang GPro kerjakan
+        </p>
+        <h3 className="mt-2 text-lg font-bold" style={{ color: textMain }}>
+          Dari diagnosis masalah → opsi kebijakan → roadmap eksekusi.
+        </h3>
+        <p className="mt-3 text-sm leading-6" style={{ color: textSub }}>
+          Banyak kajian berhenti di “penjelasan masalah”. GPro melangkah lebih jauh: merumuskan pertanyaan yang tepat,
+          mengubah data menjadi insight yang bisa dipertanggungjawabkan, lalu menyusun pilihan solusi beserta langkah
+          implementasi (aktor, tahapan, risiko, dan mitigasinya). Tujuannya sederhana: supaya keputusan bisa diambil lebih
+          cepat, lebih rapi, dan lebih mudah dieksekusi.
+        </p>
 
-            <div className="rounded-2xl p-6 shadow-sm" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-              <p className="text-sm font-bold" style={{ color: textMain }}>Kontak cepat</p>
-              <p className="mt-2 text-sm" style={{ color: textSub }}>
-                Hubungi untuk diskusi kebutuhan dan bentuk kolaborasi.
-              </p>
-              <div className="mt-4 flex flex-col gap-2">
-                <a
-                  href={BRAND.wa}
-                  className="rounded-xl px-4 py-2 text-center text-sm font-semibold text-white transition hover:opacity-90"
-                  style={{ backgroundColor: COLORS.red }}
-                >
-                  WhatsApp: +62 858-9999-3742
-                </a>
-                <a
-                  href={BRAND.email}
-                  className="rounded-xl border px-4 py-2 text-center text-sm font-semibold transition hover:-translate-y-0.5 hover:shadow-sm"
-                  style={{ borderColor: COLORS.blue, color: textMain, backgroundColor: card }}
-                >
-                  Email: pksgpro@gmail.com
-                </a>
-              </div>
-            </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {["Policy brief", "Peta analitik", "Roadmap", "Infografik", "Toolkit 1 halaman", "Deck presentasi"].map((x) => (
+            <span
+              key={x}
+              className="rounded-full border px-3 py-1 text-xs"
+              style={{ borderColor: COLORS.blue, backgroundColor: `${COLORS.blue}12`, color: textMain }}
+            >
+              {x}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-2xl p-4" style={{ border: `1px solid ${border}`, backgroundColor: dark ? "rgba(255,255,255,0.03)" : "#FAFAFA" }}>
+            <p className="text-sm font-bold" style={{ color: textMain }}>Nilai kerja</p>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm" style={{ color: textSub }}>
+              <li>Transparan pada asumsi dan sumber</li>
+              <li>Rapi, ringkas, stakeholder-friendly</li>
+              <li>Fokus pada langkah implementasi</li>
+            </ul>
+          </div>
+
+          <div className="rounded-2xl p-4" style={{ border: `1px solid ${border}`, backgroundColor: dark ? "rgba(255,255,255,0.03)" : "#FAFAFA" }}>
+            <p className="text-sm font-bold" style={{ color: textMain }}>Untuk siapa</p>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm" style={{ color: textSub }}>
+              <li>Komunitas / NGO</li>
+              <li>Pemerintah daerah & stakeholder</li>
+              <li>Pelaku usaha & kolaborator</li>
+            </ul>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Kontak cepat */}
+      <div className="rounded-2xl p-6 shadow-sm" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
+        <p className="text-sm font-bold" style={{ color: textMain }}>Kontak cepat</p>
+        <p className="mt-2 text-sm" style={{ color: textSub }}>
+          Kalau kamu ingin kolaborasi, paling cepat lewat WhatsApp. Bisa juga lewat email untuk dokumen formal.
+        </p>
+
+        <div className="mt-4 flex flex-col gap-2">
+          <a
+            href={BRAND.wa}
+            className="rounded-xl px-4 py-2 text-center text-sm font-semibold text-white transition hover:opacity-90"
+            style={{ backgroundColor: COLORS.red }}
+          >
+            WhatsApp: +62 858-9999-3742
+          </a>
+          <a
+            href={BRAND.email}
+            className="rounded-xl border px-4 py-2 text-center text-sm font-semibold transition hover:-translate-y-0.5 hover:shadow-sm"
+            style={{ borderColor: COLORS.blue, color: textMain, backgroundColor: card }}
+          >
+            Email: pksgpro@gmail.com
+          </a>
+        </div>
+
+        <div className="mt-5 rounded-2xl p-4" style={{ backgroundColor: `${COLORS.blue}${dark ? "10" : "14"}` }}>
+          <p className="text-xs font-semibold" style={{ color: textMain }}>Cara kolaborasi (singkat)</p>
+          <ol className="mt-2 list-decimal space-y-1 pl-5 text-xs" style={{ color: textSub }}>
+            <li>Diskusi kebutuhan (WA)</li>
+            <li>Ruang lingkup & output disepakati</li>
+            <li>Draft → review → final</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    {/* Cara kerja */}
+    <div className="mt-4 grid gap-4 md:grid-cols-3">
+      {[
+        { t: "Fokus kajian", d: "Logistik & rantai pasok, biaya ekonomi, kemiskinan, kesehatan bottleneck perkotaan, serta edukasi." },
+        { t: "Gaya komunikasi", d: "Bahasa sederhana, struktur jelas, dan visual yang membantu rapat/advokasi." },
+        { t: "Hasil yang diharapkan", d: "Stakeholder memahami isu, punya opsi keputusan, dan punya rute eksekusi yang realistis." },
+      ].map((x) => (
+        <div
+          key={x.t}
+          className="rounded-2xl p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+          style={{ border: `1px solid ${border}`, backgroundColor: card }}
+        >
+          <p className="text-sm font-bold" style={{ color: textMain }}>{x.t}</p>
+          <p className="mt-2 text-sm leading-6" style={{ color: textSub }}>{x.d}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* PUBLIKASI */}
       <section id="publikasi" className="mx-auto max-w-6xl px-6 pt-14 scroll-mt-24">
@@ -575,12 +644,6 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-6 rounded-2xl border border-dashed p-5 text-sm" style={{ borderColor: border, backgroundColor: card, color: textSub }}>
-            <p className="font-semibold" style={{ color: textMain }}>Cara ganti link publikasi:</p>
-            <p className="mt-1">
-              Cari bagian <b>publications</b> di kode, lalu ganti <b>url</b> dengan link Google Drive/PDF kamu.
-            </p>
-          </div>
         </div>
       </section>
 
