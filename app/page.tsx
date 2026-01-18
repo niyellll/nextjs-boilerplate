@@ -1,231 +1,159 @@
-type Project = {
-  title: string;
-  tag: string;
-  outcome: string;
-  deliverables: string[];
-};
-
 export default function Home() {
-  // === Edit cepat di sini (kalau sudah punya) ===
-  const brand = {
-    name: "GPro",
-    org: "Global Pro Eksistensi",
-    tagline: "Pusat Kajian Strategis — riset kebijakan yang bisa dipakai, bukan sekadar wacana.",
-    contact: {
-      email: "mailto:your-email@example.com", // ganti
-      whatsapp: "#", // ganti jadi link wa.me/62xxxx
-      instagram: "#", // ganti
-    },
+  const BRAND = {
+    name: "Global Pro-eksistensi",
+    short: "GPro",
+    tagline: "Pusat Kajian Strategis • Policy • Data • Peta • Roadmap",
+    wa: "https://wa.me/6285899993742",
+    email: "mailto:pksgpro@gmail.com",
   };
 
-  const credibility = [
-    {
-      title: "Berbasis data & sumber publik",
-      desc: "Mengutamakan data yang bisa ditelusuri (OSM, statistik publik, dokumen kebijakan), dengan asumsi yang dijelaskan jelas.",
-    },
-    {
-      title: "Output siap dipakai",
-      desc: "Policy brief, memo, peta analitik, dan roadmap yang formatnya siap untuk rapat, advokasi, dan pengambilan keputusan.",
-    },
-    {
-      title: "Bahasa sederhana, tetap tajam",
-      desc: "Ringkas untuk pemangku kepentingan non-teknis, namun tetap kuat secara argumentasi dan struktur kebijakan.",
-    },
-  ];
+  // Palet warna dari logo
+  const COLORS = {
+    red: "#D00705",
+    blue: "#7DB4CE",
+    ink: "#493D58",
+    soft: "#F8FAFD",
+  };
 
-  const focusAreas = [
-    "Hub logistik & konektivitas regional",
-    "Rantai pasok global & peluang Indonesia",
-    "Evaluasi PSN & biaya logistik",
-    "Bottleneck kawasan industri: macet, polusi, kesehatan",
-    "Early-warning kemiskinan untuk perencanaan",
-    "Edukasi publik: kurikulum & toolkit literasi",
-  ];
-
-  const approach = [
+  const highlights = [
     {
-      step: "1) Diagnose",
-      desc: "Merumuskan masalah dengan jelas: konteks, aktor, hambatan, dan indikator dampak.",
-    },
-    {
-      step: "2) Model",
-      desc: "Menyusun kerangka analisis: skenario, peta risiko, dan opsi kebijakan yang realistis.",
-    },
-    {
-      step: "3) Recommend",
-      desc: "Menyusun rekomendasi yang bisa dieksekusi: prioritas, timeline, dan trade-off.",
-    },
-    {
-      step: "4) Communicate",
-      desc: "Mengemas temuan jadi materi siap pakai: brief, deck, infografik, dan lampiran teknis.",
-    },
-  ];
-
-  const projects: Project[] = [
-    {
-      title: "Kediri sebagai Hub Logistik 2045",
+      title: "Hub Logistik Kediri 2045",
       tag: "Logistik • 2045",
-      outcome:
-        "Menyusun visi–roadmap dan argumentasi kebijakan untuk transformasi Kediri sebagai pusat logistik nasional–global.",
-      deliverables: ["Roadmap strategi", "Policy brief argumentatif", "Kerangka konektivitas rantai pasok"],
+      desc: "Riset dan argumentasi kebijakan tentang Kediri sebagai hub logistik nasional–global, termasuk strategi dan roadmap transformasi.",
     },
     {
-      title: "Bandara Dhoho: Integrasi konektivitas & simulasi dampak",
+      title: "Bandara Dhoho: Konektivitas & dampak ekonomi",
       tag: "Aviation • Logistics",
-      outcome:
-        "Merancang skema konektivitas bandara–transportasi dan mensimulasikan manfaat ekonomi (penumpang & kargo) untuk percepatan integrasi jaringan.",
-      deliverables: ["Draft proposal teknis", "Simulasi dampak ekonomi", "Strategi koordinasi & advokasi"],
+      desc: "Rancangan konektivitas transportasi dan simulasi manfaat ekonomi (penumpang & kargo) untuk memperkuat posisi kawasan.",
     },
     {
-      title: "Mengapa biaya logistik tidak turun meski PSN dibangun?",
-      tag: "PSN • Tata Kelola",
-      outcome:
-        "Membedah akar masalah biaya logistik yang persisten dan merumuskan rekomendasi perbaikan pada level kebijakan dan eksekusi mikro.",
-      deliverables: ["Dokumen evaluatif", "Infografik sistem biaya", "Rekomendasi transisi mikro"],
+      title: "Evaluasi PSN & Biaya Logistik",
+      tag: "Policy • Ekonomi",
+      desc: "Analisis kenapa biaya logistik tidak turun meski PSN dibangun, plus rekomendasi perbaikan yang bisa dieksekusi.",
     },
     {
-      title: "Bottleneck kawasan industri: kesehatan, kemacetan, polusi",
+      title: "Bottleneck Kawasan Industri (macet–polusi–kesehatan)",
       tag: "Kota • Kesehatan",
-      outcome:
-        "Menyusun peta risiko kesehatan dan strategi intervensi berbasis zona untuk menurunkan dampak ISPA/stres akibat kemacetan.",
-      deliverables: ["Peta zona risiko", "Memo strategi kesehatan", "Toolkit edukasi 1 halaman"],
+      desc: "Pemetaan zona risiko kesehatan dan strategi intervensi, termasuk toolkit edukasi sederhana untuk masyarakat.",
     },
     {
-      title: "Early-Warning Poverty Framework (BPS & PPP)",
+      title: "Early-Warning Poverty Framework",
       tag: "Kemiskinan • Perencanaan",
-      outcome:
-        "Membangun kerangka peringatan dini kemiskinan untuk mendukung penajaman prioritas program dan ketepatan sasaran.",
-      deliverables: ["Framework indikator", "Skema integrasi kebijakan", "Rekomendasi implementasi"],
+      desc: "Kerangka peringatan dini kemiskinan untuk penajaman program dan perencanaan pembangunan (BPS & PPP).",
     },
     {
-      title: "Policy brief industri: transformasi tekstil nasional",
+      title: "Strategi Transformasi Industri (mis. tekstil)",
       tag: "Industri • Strategi",
-      outcome:
-        "Menyusun peta strategi dan opsi kebijakan untuk menghadapi tekanan struktural industri (kompetisi harga, impor murah, dan adaptasi pasar).",
-      deliverables: ["Policy brief", "Matriks opsi kebijakan", "Roadmap transisi"],
+      desc: "Policy brief untuk menghadapi tekanan struktural industri dan opsi kebijakan yang realistis untuk transisi.",
     },
   ];
 
-  const deliverables = [
+  const services = [
     {
-      title: "Policy Brief & Memo Kebijakan",
-      desc: "Ringkas, fokus solusi, dan siap dipakai untuk rapat/advokasi. Struktur: masalah → bukti → opsi → rekomendasi.",
+      title: "Policy Brief & Memo",
+      desc: "Dokumen ringkas, jelas, dan siap dipakai untuk rapat, advokasi, dan pengambilan keputusan.",
     },
     {
-      title: "Peta Analitik & Lampiran Teknis",
-      desc: "Visual yang kuat (PNG/SVG) + lampiran metodologi agar bisa dipertanggungjawabkan dan direplikasi.",
+      title: "Peta Analitik & Visual",
+      desc: "Peta/infografik yang mudah dipahami stakeholder non-teknis, dengan metodologi yang transparan.",
     },
     {
       title: "Roadmap Implementasi",
-      desc: "Tahapan kerja dengan milestone, aktor, risiko, kebutuhan data, dan strategi koordinasi lintas lembaga.",
+      desc: "Tahapan kerja: prioritas, timeline, aktor, risiko, dan langkah eksekusi.",
     },
     {
-      title: "Deck Presentasi & Infografik",
-      desc: "Materi komunikasi untuk stakeholder: jelas, pendek, dan mudah dipahami (non-teknis friendly).",
-    },
-  ];
-
-  const faq = [
-    {
-      q: "Apakah GPro bisa mengerjakan untuk instansi/komunitas yang belum punya data lengkap?",
-      a: "Bisa. Kami mulai dari data publik yang tersedia, lalu menyusun kebutuhan data tambahan secara bertahap agar pekerjaan tetap jalan.",
-    },
-    {
-      q: "Output akhirnya apa saja?",
-      a: "Biasanya policy brief/memo, peta analitik, deck presentasi, dan lampiran teknis. Format disesuaikan kebutuhan stakeholder.",
-    },
-    {
-      q: "Apakah bisa dibuat versi ringkas untuk publik & versi teknis untuk internal?",
-      a: "Bisa. Kami biasanya siapkan 2 versi: ringkas untuk publik/stakeholder luas, dan teknis untuk tim internal/implementasi.",
+      title: "Deck Presentasi",
+      desc: "Materi presentasi profesional untuk pemangku kepentingan (singkat, tajam, dan rapi).",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 dark:bg-black dark:text-zinc-100">
+    <div style={{ backgroundColor: COLORS.soft }} className="min-h-screen text-zinc-900">
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-zinc-200/70 bg-white/70 backdrop-blur dark:border-zinc-800/70 dark:bg-black/60">
+      <header className="sticky top-0 z-30 border-b border-zinc-200/70 bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-2xl bg-zinc-900 dark:bg-zinc-100" />
+            <div className="h-11 w-11 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+              {/* Pastikan kamu upload logo ke /public/logo.png */}
+              <img src="/logo.png" alt="GPro Logo" className="h-full w-full object-cover" />
+            </div>
+
             <div className="leading-tight">
-              <p className="text-sm font-semibold">
-                {brand.name} <span className="text-zinc-500 dark:text-zinc-400">— {brand.org}</span>
+              <p className="text-sm font-bold" style={{ color: COLORS.ink }}>
+                {BRAND.short} <span className="font-medium text-zinc-500">— {BRAND.name}</span>
               </p>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">{brand.tagline}</p>
+              <p className="text-xs text-zinc-500">{BRAND.tagline}</p>
             </div>
           </div>
 
           <nav className="hidden items-center gap-6 text-sm md:flex">
             <a className="hover:opacity-80" href="#tentang">Tentang</a>
-            <a className="hover:opacity-80" href="#fokus">Fokus</a>
-            <a className="hover:opacity-80" href="#portofolio">Portofolio</a>
-            <a className="hover:opacity-80" href="#cara-kerja">Cara kerja</a>
+            <a className="hover:opacity-80" href="#karya">Karya</a>
+            <a className="hover:opacity-80" href="#layanan">Layanan</a>
             <a className="hover:opacity-80" href="#kontak">Kontak</a>
           </nav>
 
           <a
             href="#kontak"
-            className="rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:opacity-90 dark:bg-zinc-100 dark:text-black"
+            className="rounded-xl px-4 py-2 text-sm font-semibold text-white"
+            style={{ backgroundColor: COLORS.red }}
           >
-            Ajukan kolaborasi
+            Ajukan Kolaborasi
           </a>
         </div>
       </header>
 
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-6 pt-14">
-        <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-8 dark:border-zinc-800 dark:bg-zinc-950">
-          <p className="text-xs font-semibold tracking-wide text-zinc-600 dark:text-zinc-400">
+        <div
+          className="rounded-3xl border border-zinc-200 bg-white p-8"
+          style={{
+            background:
+              `linear-gradient(135deg, ${COLORS.blue}22 0%, #ffffff 45%, ${COLORS.red}14 100%)`,
+          }}
+        >
+          <p className="text-xs font-semibold tracking-wide text-zinc-600">
             STRATEGI • KEBIJAKAN • DATA • PETA • ROADMAP
           </p>
 
-          <h1 className="mt-3 text-3xl font-semibold leading-tight md:text-5xl">
-            Riset strategis yang memudahkan keputusan dan mempercepat eksekusi.
+          <h1 className="mt-3 text-3xl font-bold leading-tight md:text-5xl" style={{ color: COLORS.ink }}>
+            Membuat isu kompleks jadi keputusan yang jelas dan bisa dieksekusi.
           </h1>
 
-          <p className="mt-4 max-w-3xl text-zinc-600 dark:text-zinc-300">
-            {brand.org} membantu menyusun <span className="font-semibold text-zinc-900 dark:text-zinc-100">policy brief</span>,
-            <span className="font-semibold text-zinc-900 dark:text-zinc-100"> peta analitik</span>, dan
-            <span className="font-semibold text-zinc-900 dark:text-zinc-100"> roadmap implementasi</span> untuk isu logistik,
-            rantai pasok, biaya ekonomi, kemiskinan, dan edukasi—dengan hasil yang bisa langsung dipakai di lapangan.
+          <p className="mt-4 max-w-3xl text-zinc-600">
+            {BRAND.name} menyusun kajian strategis, policy brief, peta analitik, dan roadmap implementasi
+            untuk logistik, rantai pasok, biaya ekonomi, kemiskinan, dan edukasi—dengan bahasa yang mudah dipahami
+            dan keluaran yang siap dipakai.
           </p>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <a
-              href="#portofolio"
-              className="inline-flex items-center justify-center rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:opacity-90 dark:bg-zinc-100 dark:text-black"
+              href="#karya"
+              className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white"
+              style={{ backgroundColor: COLORS.red }}
             >
-              Lihat portofolio ringkas
+              Lihat Karya Utama
             </a>
             <a
-              href="#kontak"
-              className="inline-flex items-center justify-center rounded-xl border border-zinc-300 px-5 py-3 text-sm font-semibold hover:bg-white dark:border-zinc-700 dark:hover:bg-zinc-900"
+              href={BRAND.wa}
+              className="inline-flex items-center justify-center rounded-xl border px-5 py-3 text-sm font-semibold"
+              style={{ borderColor: COLORS.blue, color: COLORS.ink, backgroundColor: "#ffffff" }}
             >
-              Diskusi kebutuhan Anda
+              Chat WhatsApp
             </a>
           </div>
 
-          {/* Trust / credibility cards */}
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {credibility.map((c) => (
-              <div
-                key={c.title}
-                className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-black"
-              >
-                <p className="text-sm font-semibold">{c.title}</p>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">{c.desc}</p>
+            {[
+              { t: "Berbasis data", d: "Mengutamakan sumber publik dan asumsi yang transparan." },
+              { t: "Output siap pakai", d: "Ringkas, rapi, dan cocok untuk rapat/advokasi." },
+              { t: "Komunikasi kuat", d: "Bahasa sederhana tanpa menghilangkan ketajaman." },
+            ].map((x) => (
+              <div key={x.t} className="rounded-2xl border border-zinc-200 bg-white p-6">
+                <p className="text-sm font-bold" style={{ color: COLORS.ink }}>{x.t}</p>
+                <p className="mt-2 text-sm text-zinc-600">{x.d}</p>
               </div>
             ))}
-          </div>
-
-          {/* Proof placeholders (optional) */}
-          <div className="mt-6 rounded-2xl border border-dashed border-zinc-300 bg-white p-5 text-sm text-zinc-600 dark:border-zinc-700 dark:bg-black dark:text-zinc-300">
-            <p className="font-semibold text-zinc-900 dark:text-zinc-100">Tambahkan bukti agar lebih meyakinkan (opsional)</p>
-            <ul className="mt-2 list-disc space-y-1 pl-5">
-              <li>Link PDF policy brief / riset (Google Drive / GitHub)</li>
-              <li>Logo partner/kolaborator (jika ada)</li>
-              <li>Angka capaian (mis. jumlah peta, dokumen, wilayah kajian) — isi dengan data asli</li>
-            </ul>
           </div>
         </div>
       </section>
@@ -234,164 +162,109 @@ export default function Home() {
       <section id="tentang" className="mx-auto max-w-6xl px-6 pt-14">
         <div className="grid gap-6 md:grid-cols-3">
           <div className="md:col-span-2">
-            <h2 className="text-xl font-semibold">Tentang GPro</h2>
-            <p className="mt-3 text-zinc-600 dark:text-zinc-300">
-              {brand.name} adalah inisiatif kajian strategis yang berorientasi pada solusi. Kami menulis dan memetakan isu kompleks
-              menjadi rekomendasi yang jelas, prioritas yang masuk akal, dan rencana yang bisa dieksekusi.
+            <h2 className="text-xl font-bold" style={{ color: COLORS.ink }}>Tentang GPro</h2>
+            <p className="mt-3 text-zinc-600">
+              GPro berfokus pada pekerjaan yang “nyambung ke eksekusi”: menyusun kerangka masalah,
+              membangun opsi kebijakan, lalu mengemasnya jadi materi yang bisa dipakai oleh pemangku kepentingan.
             </p>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-zinc-200 p-6 dark:border-zinc-800">
-                <p className="text-sm font-semibold">Nilai kerja</p>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
-                  <li>Berbasis bukti dan asumsi yang transparan</li>
-                  <li>Format jelas untuk stakeholder non-teknis</li>
-                  <li>Fokus pada implementasi, bukan jargon</li>
+              <div className="rounded-2xl border border-zinc-200 bg-white p-6">
+                <p className="text-sm font-bold" style={{ color: COLORS.ink }}>Nilai kerja</p>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-600">
+                  <li>Transparan pada asumsi & sumber</li>
+                  <li>Rapi, ringkas, stakeholder-friendly</li>
+                  <li>Fokus pada langkah implementasi</li>
                 </ul>
               </div>
-              <div className="rounded-2xl border border-zinc-200 p-6 dark:border-zinc-800">
-                <p className="text-sm font-semibold">Untuk siapa</p>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
+              <div className="rounded-2xl border border-zinc-200 bg-white p-6">
+                <p className="text-sm font-bold" style={{ color: COLORS.ink }}>Untuk siapa</p>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-600">
                   <li>Komunitas/NGO</li>
                   <li>Pemerintah daerah</li>
-                  <li>Pelaku usaha & pemangku kepentingan</li>
+                  <li>Pelaku usaha & stakeholder</li>
                 </ul>
               </div>
             </div>
           </div>
 
-          {/* Quick contact box */}
-          <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-950">
-            <p className="text-sm font-semibold">Kontak cepat</p>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
-              Pasang link asli agar terlihat profesional dan mudah dihubungi.
+          {/* Kontak cepat */}
+          <div className="rounded-3xl border border-zinc-200 bg-white p-6">
+            <p className="text-sm font-bold" style={{ color: COLORS.ink }}>Kontak cepat</p>
+            <p className="mt-2 text-sm text-zinc-600">
+              Hubungi untuk diskusi kebutuhan dan bentuk kolaborasi.
             </p>
+
             <div className="mt-4 flex flex-col gap-2">
               <a
-                href={brand.contact.whatsapp}
-                className="rounded-xl bg-zinc-900 px-4 py-2 text-center text-sm font-semibold text-white hover:opacity-90 dark:bg-zinc-100 dark:text-black"
+                href={BRAND.wa}
+                className="rounded-xl px-4 py-2 text-center text-sm font-semibold text-white"
+                style={{ backgroundColor: COLORS.red }}
               >
-                WhatsApp
+                WhatsApp: +62 858-9999-3742
               </a>
               <a
-                href={brand.contact.email}
-                className="rounded-xl border border-zinc-300 px-4 py-2 text-center text-sm font-semibold hover:bg-white dark:border-zinc-700 dark:hover:bg-zinc-900"
+                href={BRAND.email}
+                className="rounded-xl border px-4 py-2 text-center text-sm font-semibold"
+                style={{ borderColor: COLORS.blue, color: COLORS.ink }}
               >
-                Email
-              </a>
-              <a
-                href={brand.contact.instagram}
-                className="rounded-xl border border-zinc-300 px-4 py-2 text-center text-sm font-semibold hover:bg-white dark:border-zinc-700 dark:hover:bg-zinc-900"
-              >
-                Instagram
+                Email: pksgpro@gmail.com
               </a>
             </div>
-            <p className="mt-4 text-xs text-zinc-500 dark:text-zinc-400">
-              Tips: email dengan domain sendiri (mis. admin@domain.com) akan meningkatkan kepercayaan.
-            </p>
+
+            <div className="mt-5 rounded-2xl p-4" style={{ backgroundColor: `${COLORS.blue}1A` }}>
+              <p className="text-xs font-semibold" style={{ color: COLORS.ink }}>Tips agar makin profesional</p>
+              <p className="mt-1 text-xs text-zinc-600">
+                Kalau nanti sudah siap bisnis, pertimbangkan email domain sendiri (mis. admin@domain.com) untuk meningkatkan trust.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Fokus */}
-      <section id="fokus" className="mx-auto max-w-6xl px-6 pt-14">
-        <h2 className="text-xl font-semibold">Fokus kajian</h2>
-        <p className="mt-2 max-w-3xl text-sm text-zinc-600 dark:text-zinc-300">
-          Area yang paling sering dikerjakan dan menjadi kekuatan utama GPro.
+      {/* Karya */}
+      <section id="karya" className="mx-auto max-w-6xl px-6 pt-14">
+        <h2 className="text-xl font-bold" style={{ color: COLORS.ink }}>Karya utama</h2>
+        <p className="mt-2 max-w-3xl text-sm text-zinc-600">
+          Ringkasan portofolio yang mencerminkan tema kerja GPro. (Nanti kamu bisa tambah link PDF/Drive agar lebih meyakinkan.)
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {focusAreas.map((x) => (
-            <span
-              key={x}
-              className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200"
-            >
-              {x}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* Portofolio */}
-      <section id="portofolio" className="mx-auto max-w-6xl px-6 pt-14">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-xl font-semibold">Portofolio ringkas</h2>
-            <p className="mt-2 max-w-3xl text-sm text-zinc-600 dark:text-zinc-300">
-              Contoh tema & keluaran yang sudah pernah dikerjakan GPro. (Bisa kamu tambah link PDF/Drive agar makin meyakinkan.)
-            </p>
-          </div>
-        </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {projects.map((p) => (
-            <div
-              key={p.title}
-              className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-black"
-            >
+          {highlights.map((p) => (
+            <div key={p.title} className="rounded-2xl border border-zinc-200 bg-white p-6">
               <div className="flex items-start justify-between gap-3">
-                <p className="text-sm font-semibold">{p.title}</p>
-                <span className="shrink-0 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200">
+                <p className="text-sm font-bold" style={{ color: COLORS.ink }}>{p.title}</p>
+                <span
+                  className="shrink-0 rounded-full border px-3 py-1 text-xs"
+                  style={{ borderColor: COLORS.blue, color: COLORS.ink, backgroundColor: `${COLORS.blue}12` }}
+                >
                   {p.tag}
                 </span>
               </div>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">{p.outcome}</p>
-              <div className="mt-4">
-                <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Keluaran</p>
-                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-600 dark:text-zinc-300">
-                  {p.deliverables.map((d) => (
-                    <li key={d}>{d}</li>
-                  ))}
-                </ul>
-              </div>
+              <p className="mt-2 text-sm text-zinc-600">{p.desc}</p>
             </div>
           ))}
         </div>
 
-        {/* Optional: public links area */}
-        <div className="mt-6 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 text-sm text-zinc-600 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300">
-          <p className="font-semibold text-zinc-900 dark:text-zinc-100">Agar lebih dipercaya:</p>
+        <div className="mt-6 rounded-2xl border border-dashed border-zinc-300 bg-white p-5 text-sm text-zinc-600">
+          <p className="font-semibold" style={{ color: COLORS.ink }}>Agar makin dipercaya:</p>
           <p className="mt-1">
-            Tambahkan 3–5 link publik (contoh PDF policy brief / peta / dashboard). Kalau kamu kirim linknya nanti, aku bisa pasang tombol “Unduh” di sini.
+            Tambahkan 3–5 link publik (PDF policy brief, peta, dashboard). Kalau kamu kirim linknya nanti, aku bisa pasang tombol “Unduh”.
           </p>
         </div>
       </section>
 
-      {/* Cara kerja */}
-      <section id="cara-kerja" className="mx-auto max-w-6xl px-6 pt-14">
-        <h2 className="text-xl font-semibold">Cara kerja yang rapi & terukur</h2>
-        <p className="mt-2 max-w-3xl text-sm text-zinc-600 dark:text-zinc-300">
-          Ini membantu stakeholder percaya karena prosesnya jelas, bukan “asal opini”.
+      {/* Layanan */}
+      <section id="layanan" className="mx-auto max-w-6xl px-6 pt-14">
+        <h2 className="text-xl font-bold" style={{ color: COLORS.ink }}>Layanan</h2>
+        <p className="mt-2 max-w-3xl text-sm text-zinc-600">
+          Format output yang biasa disiapkan untuk stakeholder dan kolaborator.
         </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-4">
-          {approach.map((a) => (
-            <div key={a.step} className="rounded-2xl border border-zinc-200 p-6 dark:border-zinc-800">
-              <p className="text-sm font-semibold">{a.step}</p>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">{a.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Output */}
-      <section id="output" className="mx-auto max-w-6xl px-6 pt-14">
-        <h2 className="text-xl font-semibold">Output yang bisa disiapkan</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {deliverables.map((d) => (
-            <div key={d.title} className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-black">
-              <p className="text-sm font-semibold">{d.title}</p>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">{d.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="mx-auto max-w-6xl px-6 pt-14">
-        <h2 className="text-xl font-semibold">FAQ</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {faq.map((f) => (
-            <div key={f.q} className="rounded-2xl border border-zinc-200 p-6 dark:border-zinc-800">
-              <p className="text-sm font-semibold">{f.q}</p>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">{f.a}</p>
+          {services.map((s) => (
+            <div key={s.title} className="rounded-2xl border border-zinc-200 bg-white p-6">
+              <p className="text-sm font-bold" style={{ color: COLORS.ink }}>{s.title}</p>
+              <p className="mt-2 text-sm text-zinc-600">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -399,36 +272,32 @@ export default function Home() {
 
       {/* CTA */}
       <section id="kontak" className="mx-auto max-w-6xl px-6 pb-16 pt-14">
-        <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-8 dark:border-zinc-800 dark:bg-zinc-950">
-          <h2 className="text-xl font-semibold">Siap kolaborasi</h2>
-          <p className="mt-2 max-w-3xl text-sm text-zinc-600 dark:text-zinc-300">
-            Kalau kamu ingin kajian/peta/policy brief yang rapi dan bisa dipakai untuk pengambilan keputusan, kita bisa mulai dari diskusi singkat:
-            tujuan, konteks, timeline, dan output yang dibutuhkan.
+        <div className="rounded-3xl border border-zinc-200 bg-white p-8">
+          <h2 className="text-xl font-bold" style={{ color: COLORS.ink }}>Siap kolaborasi</h2>
+          <p className="mt-2 max-w-3xl text-sm text-zinc-600">
+            Jika kamu butuh policy brief, peta analitik, atau roadmap implementasi yang rapi dan mudah dipahami,
+            kita bisa mulai dari diskusi singkat.
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
-              href={brand.contact.whatsapp}
-              className="inline-flex items-center justify-center rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white hover:opacity-90 dark:bg-zinc-100 dark:text-black"
+              href={BRAND.wa}
+              className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white"
+              style={{ backgroundColor: COLORS.red }}
             >
-              Hubungi via WhatsApp
+              WhatsApp
             </a>
             <a
-              href={brand.contact.email}
-              className="inline-flex items-center justify-center rounded-xl border border-zinc-300 px-5 py-3 text-sm font-semibold hover:bg-white dark:border-zinc-700 dark:hover:bg-zinc-900"
+              href={BRAND.email}
+              className="inline-flex items-center justify-center rounded-xl border px-5 py-3 text-sm font-semibold"
+              style={{ borderColor: COLORS.blue, color: COLORS.ink }}
             >
-              Kirim email
-            </a>
-            <a
-              href={brand.contact.instagram}
-              className="inline-flex items-center justify-center rounded-xl border border-zinc-300 px-5 py-3 text-sm font-semibold hover:bg-white dark:border-zinc-700 dark:hover:bg-zinc-900"
-            >
-              Lihat Instagram
+              Email
             </a>
           </div>
 
-          <p className="mt-7 text-xs text-zinc-500 dark:text-zinc-400">
-            © {new Date().getFullYear()} {brand.org}. All rights reserved.
+          <p className="mt-7 text-xs text-zinc-500">
+            © {new Date().getFullYear()} {BRAND.name}. All rights reserved.
           </p>
         </div>
       </section>
