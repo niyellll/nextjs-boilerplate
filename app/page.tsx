@@ -520,18 +520,15 @@ export default function Home() {
       style={{ border: `1px solid ${border}`, backgroundColor: card }}
     >
       <p className="text-sm font-semibold" style={{ color: textMain }}>
-        Referensi & Rujukan
-      </p>
-      <p className="mt-1 text-xs" style={{ color: textSub }}>
-        Logo berikut ditampilkan sebagai rujukan data/framework (bukan endorsement).
+        Our Partner
       </p>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
         {[
-          { name: "McKinsey & Company", src: "/partners/mckinsey.png", href: "https://www.mckinsey.com" },
-          { name: "World Economic Forum", src: "/partners/wef.png", href: "https://www.weforum.org" },
-          { name: "International Labour Organization", src: "/partners/ilo.png", href: "https://www.ilo.org" },
-          { name: "The World Bank", src: "/partners/worldbank.png", href: "https://www.worldbank.org" },
+          { name: "McKinsey & Company", src: "/public/mckinsey.png", href: "https://www.mckinsey.com" },
+          { name: "World Economic Forum", src: "/public/wef.png", href: "https://www.weforum.org" },
+          { name: "International Labour Organization", src: "/public/ilo.png", href: "https://www.ilo.org" },
+          { name: "The World Bank", src: "/public/worldbank.png", href: "https://www.worldbank.org" },
         ].map((p) => (
           <a
             key={p.name}
