@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 
 type WorkItem = {
   title: string;
@@ -61,9 +62,10 @@ export default function Home() {
   const card = dark ? "#0B0B10" : "#FFFFFF";
   const border = dark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.10)";
   const textMain = dark ? "#F4F4F5" : COLORS.ink;
+  // FIX light-mode text supaya tidak pucat
   const textSub = dark ? "rgba(244,244,245,0.78)" : "rgba(16,16,24,0.78)";
 
-  // ===== TOAST =====
+  // ===== TOAST (Copied!) =====
   const [toast, setToast] = useState<string | null>(null);
   useEffect(() => {
     if (!toast) return;
@@ -76,6 +78,7 @@ export default function Home() {
       await navigator.clipboard.writeText(txt);
       setToast(label);
     } catch {
+      // fallback
       const ta = document.createElement("textarea");
       ta.value = txt;
       document.body.appendChild(ta);
@@ -86,7 +89,7 @@ export default function Home() {
     }
   };
 
-  // ===== MODAL =====
+  // ===== MODAL FORM =====
   const [openModal, setOpenModal] = useState(false);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -115,10 +118,10 @@ export default function Home() {
     window.open(`${BRAND.waUrl}?text=${msg}`, "_blank");
   };
 
-  // ===== SCROLL REVEAL (pakai .gpro-reveal agar tidak lupa data attribute) =====
+  // ===== SCROLL REVEAL (konsisten) =====
   useEffect(() => {
     const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".gpro-reveal"));
+    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
 
     if (reduceMotion) {
       els.forEach((el) => el.classList.add("gpro-reveal-in"));
@@ -152,6 +155,11 @@ export default function Home() {
       ) : null}
     </div>
   );
+
+  const chipStyle: CSSProperties = {
+    borderColor: COLORS.blue,
+    backgroundColor: `${COLORS.blue}12`,
+  };
 
   // ===== DATA =====
   const works: WorkItem[] = [
@@ -214,31 +222,30 @@ export default function Home() {
     },
   ];
 
-  // Tips: nanti kamu bisa taruh file di /public/docs/... lalu url = "/docs/namafile.pdf"
   const publications: Publication[] = [
     {
       title: "Policy Brief — Hub Logistik Kediri 2045",
       type: "PDF",
-      desc: "Ringkasan kebijakan + roadmap strategi (gantikan URL ini dengan file PDF kamu).",
-      url: "#",
+      desc: "Ringkasan kebijakan + roadmap strategi (ganti dengan link PDF kamu).",
+      url: "https://example.com/kediri-policy-brief.pdf",
     },
     {
       title: "Peta Analitik — Bottleneck Kawasan Industri",
       type: "Peta",
-      desc: "Visual zona risiko & intervensi (gantikan URL ini dengan file peta kamu).",
-      url: "#",
+      desc: "Visual zona risiko & intervensi (ganti dengan link peta/file kamu).",
+      url: "https://example.com/peta-bottleneck.png",
     },
     {
       title: "Toolkit — Edukasi ISPA & Stres Kemacetan (1 halaman)",
       type: "Toolkit",
-      desc: "Materi edukasi publik ringkas (gantikan URL ini dengan file toolkit kamu).",
-      url: "#",
+      desc: "Materi edukasi publik ringkas (ganti dengan link toolkit kamu).",
+      url: "https://example.com/toolkit-ispa.pdf",
     },
     {
       title: "Deck — Evaluasi PSN & Biaya Logistik",
       type: "Slide",
-      desc: "Materi presentasi stakeholder (gantikan URL ini dengan file deck kamu).",
-      url: "#",
+      desc: "Materi presentasi stakeholder (ganti dengan link slide kamu).",
+      url: "https://example.com/deck-psn.pptx",
     },
   ];
 
@@ -254,6 +261,85 @@ export default function Home() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: bg }}>
+      {/* GLOBAL CSS untuk animasi premium + shine + gradient subtle */}
+      <style jsx global>{`
+        .gpro-reveal {
+          opacity: 0;
+          transform: translateY(14px);
+          transition: opacity 700ms ease, transform 700ms ease;
+        }
+        .gpro-reveal.gpro-reveal-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .gpro-card {
+          transition: transform 250ms ease, box-shadow 250ms ease;
+        }
+        .gpro-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+        }
+        .dark .gpro-card:hover {
+          box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .gpro-shine {
+          position: relative;
+          overflow: hidden;
+        }
+        .gpro-shine::before {
+          content: "";
+          position: absolute;
+          top: -40%;
+          left: -30%;
+          width: 40%;
+          height: 200%;
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.35) 50%,
+            rgba(255, 255, 255, 0) 100%
+          );
+          transform: translateX(-120%) rotate(10deg);
+          transition: transform 700ms ease;
+        }
+        .gpro-shine:hover::before {
+          transform: translateX(380%) rotate(10deg);
+        }
+
+        .gpro-animated-gradient {
+          background: linear-gradient(
+            120deg,
+            rgba(125, 180, 206, 0.22),
+            rgba(208, 7, 5, 0.14),
+            rgba(125, 180, 206, 0.18)
+          );
+          background-size: 220% 220%;
+          animation: gproGradient 14s ease-in-out infinite;
+        }
+        .dark .gpro-animated-gradient {
+          background: linear-gradient(
+            120deg,
+            rgba(125, 180, 206, 0.14),
+            rgba(208, 7, 5, 0.10),
+            rgba(125, 180, 206, 0.12)
+          );
+          background-size: 220% 220%;
+        }
+        @keyframes gproGradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+      `}</style>
+
       {/* BACKGROUND SUBTLE MOVING GRADIENT */}
       <div className="pointer-events-none fixed inset-0 -z-10 opacity-70">
         <div className="absolute inset-0 gpro-animated-gradient" />
@@ -273,6 +359,7 @@ export default function Home() {
               className="h-11 w-11 overflow-hidden rounded-2xl"
               style={{ border: `1px solid ${border}`, backgroundColor: card }}
             >
+              {/* kalau belum ada logo.png, aman: dia akan hide otomatis */}
               <img
                 src="/logo.png"
                 alt="GPro Logo"
@@ -284,14 +371,9 @@ export default function Home() {
             </div>
             <div className="leading-tight">
               <p className="text-sm font-bold" style={{ color: textMain }}>
-                {BRAND.short}{" "}
-                <span className="font-medium" style={{ color: textSub }}>
-                  — {BRAND.full}
-                </span>
+                {BRAND.short} <span className="font-medium" style={{ color: textSub }}>— {BRAND.full}</span>
               </p>
-              <p className="text-xs" style={{ color: textSub }}>
-                {BRAND.subtitle}
-              </p>
+              <p className="text-xs" style={{ color: textSub }}>{BRAND.subtitle}</p>
             </div>
           </div>
 
@@ -327,7 +409,7 @@ export default function Home() {
 
       {/* HERO */}
       <section className="mx-auto max-w-6xl px-6 pt-12">
-        <div className="gpro-reveal">
+        <div data-reveal className="gpro-reveal">
           <div
             className="relative overflow-hidden rounded-3xl p-8"
             style={{
@@ -386,15 +468,9 @@ export default function Home() {
               {/* Featured */}
               <div className="w-full md:w-[420px]">
                 <div className="gpro-card rounded-2xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-                  <p className="text-xs font-semibold" style={{ color: textSub }}>
-                    Featured work
-                  </p>
-                  <p className="mt-2 text-sm font-bold" style={{ color: textMain }}>
-                    {featured.title}
-                  </p>
-                  <p className="mt-2 text-sm" style={{ color: textSub }}>
-                    {featured.summary}
-                  </p>
+                  <p className="text-xs font-semibold" style={{ color: textSub }}>Featured work</p>
+                  <p className="mt-2 text-sm font-bold" style={{ color: textMain }}>{featured.title}</p>
+                  <p className="mt-2 text-sm" style={{ color: textSub }}>{featured.summary}</p>
 
                   <div className="mt-4 flex flex-wrap gap-2">
                     {featured.outputs.map((o) => (
@@ -409,9 +485,7 @@ export default function Home() {
                   </div>
 
                   <div className="mt-5 flex items-center justify-between">
-                    <span className="text-xs font-semibold" style={{ color: textSub }}>
-                      {featured.tag}
-                    </span>
+                    <span className="text-xs font-semibold" style={{ color: textSub }}>{featured.tag}</span>
                     <a href="#portofolio" className="text-sm font-semibold" style={{ color: COLORS.red }}>
                       Lihat semua →
                     </a>
@@ -429,12 +503,8 @@ export default function Home() {
                 { t: "Respon cepat", d: "WhatsApp untuk diskusi awal." },
               ].map((x) => (
                 <div key={x.t} className="gpro-card rounded-2xl p-5" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-                  <p className="text-sm font-bold" style={{ color: textMain }}>
-                    {x.t}
-                  </p>
-                  <p className="mt-1 text-sm" style={{ color: textSub }}>
-                    {x.d}
-                  </p>
+                  <p className="text-sm font-bold" style={{ color: textMain }}>{x.t}</p>
+                  <p className="mt-1 text-sm" style={{ color: textSub }}>{x.d}</p>
                 </div>
               ))}
             </div>
@@ -442,91 +512,74 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PARTNER STRIP (lebih keren + tidak misleading) */}
-      <section className="mx-auto max-w-6xl px-6 pt-12">
-        <div className="gpro-reveal">
-          <div className="rounded-3xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-            <p className="text-sm font-semibold" style={{ color: textMain }}>
-              Referensi & benchmark yang sering dipakai
-            </p>
-            <p className="mt-1 text-xs" style={{ color: textSub }}>
-              Logo berikut digunakan sebagai <b>rujukan sumber/benchmark</b> (bukan pernyataan afiliasi resmi).
-            </p>
+      {/* PARTNER / REFERENSI STRIP */}
+<section className="mx-auto max-w-6xl px-6 pt-12">
+  <div data-reveal className="gpro-reveal">
+    <div
+      className="rounded-3xl p-6"
+      style={{ border: `1px solid ${border}`, backgroundColor: card }}
+    >
+      <p className="text-sm font-semibold" style={{ color: textMain }}>
+        Our Partner
+      </p>
 
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
-              {[
-                { name: "McKinsey & Company", src: "/mckinsey.png", href: "https://www.mckinsey.com" },
-                { name: "World Economic Forum", src: "/wef.png", href: "https://www.weforum.org" },
-                { name: "International Labour Organization", src: "/ilo.png", href: "https://www.ilo.org" },
-                { name: "The World Bank", src: "/worldbank.png", href: "https://www.worldbank.org" },
-              ].map((p) => (
-                <a
-                  key={p.name}
-                  href={p.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="gpro-card gpro-partner-wrap flex items-center justify-center rounded-2xl px-4 py-6"
-                  style={{
-                    border: `1px solid ${border}`,
-                    background: dark
-                      ? "linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))"
-                      : "linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01))",
-                  }}
-                  title={p.name}
-                >
-                  <div
-                    className="flex h-14 w-full items-center justify-center rounded-xl"
-                    style={{
-                      backgroundColor: dark ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.95)",
-                      border: `1px solid ${dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.06)"}`,
-                    }}
-                  >
-                    <img
-                      src={p.src}
-                      alt={p.name}
-                      className="h-9 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100 hover:scale-[1.03]"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.display = "none";
-                      }}
-                    />
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+        {[
+          { name: "McKinsey & Company", src: "/mckinsey.png", href: "https://www.mckinsey.com" },
+          { name: "World Economic Forum", src: "/wef.png", href: "https://www.weforum.org" },
+          { name: "International Labour Organization", src: "/ilo.png", href: "https://www.ilo.org" },
+          { name: "The World Bank", src: "/worldbank.png", href: "https://www.worldbank.org" },
+        ].map((p) => (
+          <a
+            key={p.name}
+            href={p.href}
+            target="_blank"
+            rel="noreferrer"
+            className="gpro-card flex items-center justify-center rounded-2xl px-4 py-6"
+            style={{
+              border: `1px solid ${border}`,
+              backgroundColor: dark ? "rgba(255,255,255,0.04)" : "#fff",
+            }}
+            title={p.name}
+          >
+            <img
+              src={p.src}
+              alt={p.name}
+              className="h-10 w-auto object-contain opacity-90 transition hover:opacity-100"
+              onError={(e) => {
+                // kalau file belum ada / salah nama → biar tidak bikin blank aneh
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* TENTANG */}
       <section id="tentang" className="mx-auto max-w-6xl px-6 pt-14 scroll-mt-24">
-        <div className="gpro-reveal">
+        <div data-reveal className="gpro-reveal">
           <SectionTitle
             title="Tentang GPro"
-            desc="GPro (Global Pro-eksistensi) adalah pusat kajian strategis yang membantu organisasi dan pemangku kepentingan mengubah isu rumit menjadi keputusan yang jelas. Fokus kami bukan sekadar “analisis”, tetapi merancang opsi keputusan dan langkah eksekusi yang realistis."
+            desc="GPro (Global Pro-eksistensi) adalah pusat kajian strategis yang membantu organisasi dan pemangku kepentingan mengubah isu rumit menjadi keputusan yang jelas. Fokus kami bukan sekadar “analisis”, tapi menyusun arah, prioritas, dan langkah eksekusi—dengan bahasa yang mudah dipahami dan output yang siap dipakai."
           />
 
           <div className="grid gap-4 md:grid-cols-3">
             <div className="md:col-span-2 gpro-card rounded-2xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
               <p className="text-sm font-semibold" style={{ color: textSub }}>
-                Cara kerja GPro
+                Apa yang GPro kerjakan
               </p>
-
               <h3 className="mt-2 text-lg font-bold" style={{ color: textMain }}>
-                Diagnosis masalah → opsi kebijakan → roadmap eksekusi.
+                Dari diagnosis masalah → opsi kebijakan → roadmap eksekusi.
               </h3>
-
               <p className="mt-3 text-sm leading-6" style={{ color: textSub }}>
-                Banyak kajian berhenti di “penjelasan masalah”. GPro melangkah lebih jauh: kami menyusun pertanyaan yang tepat,
-                menguji asumsi secara transparan, dan merapikan data menjadi insight yang bisa dipertanggungjawabkan. Setelah itu,
-                insight diterjemahkan menjadi beberapa opsi kebijakan (plus-minus, risiko, dan mitigasi) agar stakeholder bisa memilih
-                keputusan dengan lebih percaya diri.
-              </p>
-
-              <p className="mt-3 text-sm leading-6" style={{ color: textSub }}>
-                Yang membedakan GPro adalah fokus pada <b>langkah implementasi</b>. Kami bantu menyusun “bagaimana cara menjalankannya”:
-                tahapan kerja, aktor yang perlu dilibatkan, timeline realistis, kebutuhan data tambahan, serta indikator keberhasilan.
-                Hasil akhirnya bukan sekadar laporan panjang—melainkan dokumen ringkas, deck presentasi, peta analitik, atau toolkit
-                yang siap dipakai untuk rapat, advokasi, atau koordinasi lintas pihak.
+                Banyak kajian berhenti di “penjelasan masalah”. GPro melangkah lebih jauh: merumuskan pertanyaan yang tepat,
+                mengubah data menjadi insight yang bisa dipertanggungjawabkan, lalu menyusun pilihan solusi beserta langkah
+                implementasi (aktor, tahapan, risiko, dan mitigasinya). Tujuannya sederhana: supaya keputusan bisa diambil lebih
+                cepat, lebih rapi, dan lebih mudah dieksekusi.
               </p>
 
               <div className="mt-4 flex flex-wrap gap-2">
@@ -542,43 +595,28 @@ export default function Home() {
               </div>
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                <div
-                  className="rounded-2xl p-4"
-                  style={{ border: `1px solid ${border}`, backgroundColor: dark ? "rgba(255,255,255,0.03)" : "#FAFAFA" }}
-                >
-                  <p className="text-sm font-bold" style={{ color: textMain }}>
-                    Nilai kerja
-                  </p>
+                <div className="rounded-2xl p-4" style={{ border: `1px solid ${border}`, backgroundColor: dark ? "rgba(255,255,255,0.03)" : "#FAFAFA" }}>
+                  <p className="text-sm font-bold" style={{ color: textMain }}>Nilai kerja</p>
                   <ul className="mt-2 list-disc space-y-1 pl-5 text-sm" style={{ color: textSub }}>
                     <li>Transparan pada asumsi dan sumber</li>
                     <li>Rapi, ringkas, stakeholder-friendly</li>
                     <li>Fokus pada langkah implementasi</li>
-                    <li>Dokumen siap rapat/advokasi</li>
                   </ul>
                 </div>
 
-                <div
-                  className="rounded-2xl p-4"
-                  style={{ border: `1px solid ${border}`, backgroundColor: dark ? "rgba(255,255,255,0.03)" : "#FAFAFA" }}
-                >
-                  <p className="text-sm font-bold" style={{ color: textMain }}>
-                    Untuk siapa
-                  </p>
+                <div className="rounded-2xl p-4" style={{ border: `1px solid ${border}`, backgroundColor: dark ? "rgba(255,255,255,0.03)" : "#FAFAFA" }}>
+                  <p className="text-sm font-bold" style={{ color: textMain }}>Untuk siapa</p>
                   <ul className="mt-2 list-disc space-y-1 pl-5 text-sm" style={{ color: textSub }}>
                     <li>Komunitas / NGO</li>
                     <li>Pemerintah daerah & stakeholder</li>
                     <li>Pelaku usaha & kolaborator</li>
-                    <li>Tim riset, advokasi, dan program</li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            {/* Kontak cepat */}
             <div className="gpro-card rounded-2xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-              <p className="text-sm font-bold" style={{ color: textMain }}>
-                Kontak cepat
-              </p>
+              <p className="text-sm font-bold" style={{ color: textMain }}>Kontak cepat</p>
               <p className="mt-2 text-sm" style={{ color: textSub }}>
                 Diskusi awal paling cepat lewat WhatsApp. Email untuk kebutuhan dokumen formal.
               </p>
@@ -627,9 +665,7 @@ export default function Home() {
               </div>
 
               <div className="mt-5 rounded-2xl p-4" style={{ backgroundColor: `${COLORS.blue}${dark ? "10" : "14"}` }}>
-                <p className="text-xs font-semibold" style={{ color: textMain }}>
-                  Cara kolaborasi (singkat)
-                </p>
+                <p className="text-xs font-semibold" style={{ color: textMain }}>Cara kolaborasi (singkat)</p>
                 <ol className="mt-2 list-decimal space-y-1 pl-5 text-xs" style={{ color: textSub }}>
                   <li>Diskusi kebutuhan (WA)</li>
                   <li>Ruang lingkup & output disepakati</li>
@@ -638,35 +674,40 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            {[
+              { t: "Fokus kajian", d: "Logistik & rantai pasok, biaya ekonomi, kemiskinan, kesehatan bottleneck perkotaan, serta edukasi." },
+              { t: "Gaya komunikasi", d: "Bahasa sederhana, struktur jelas, dan visual yang membantu rapat/advokasi." },
+              { t: "Hasil yang diharapkan", d: "Stakeholder memahami isu, punya opsi keputusan, dan punya rute eksekusi yang realistis." },
+            ].map((x) => (
+              <div key={x.t} className="gpro-card rounded-2xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
+                <p className="text-sm font-bold" style={{ color: textMain }}>{x.t}</p>
+                <p className="mt-2 text-sm leading-6" style={{ color: textSub }}>{x.d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* PUBLIKASI */}
       <section id="publikasi" className="mx-auto max-w-6xl px-6 pt-14 scroll-mt-24">
-        <div className="gpro-reveal">
+        <div data-reveal className="gpro-reveal">
           <SectionTitle
             title="Publikasi & Produk"
-            desc="Dokumen/peta/toolkit yang bisa diunduh. (Sekarang placeholder dulu — nanti tinggal ganti URL-nya.)"
+            desc="Dokumen/peta/toolkit yang bisa diunduh. (Sementara link masih contoh — nanti kamu tinggal ganti URL-nya.)"
           />
 
           <div className="grid gap-4 md:grid-cols-2">
             {publications.map((p) => (
               <div key={p.title} className="gpro-card rounded-2xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
                 <div className="flex items-start justify-between gap-3">
-                  <p className="text-sm font-bold" style={{ color: textMain }}>
-                    {p.title}
-                  </p>
-                  <span
-                    className="rounded-full border px-3 py-1 text-xs font-semibold"
-                    style={{ borderColor: COLORS.blue, backgroundColor: `${COLORS.blue}12`, color: textMain }}
-                  >
+                  <p className="text-sm font-bold" style={{ color: textMain }}>{p.title}</p>
+                  <span className="rounded-full border px-3 py-1 text-xs font-semibold" style={{ ...chipStyle, color: textMain }}>
                     {p.type}
                   </span>
                 </div>
-
-                <p className="mt-2 text-sm" style={{ color: textSub }}>
-                  {p.desc}
-                </p>
+                <p className="mt-2 text-sm" style={{ color: textSub }}>{p.desc}</p>
 
                 <div className="mt-5 flex gap-3">
                   <a
@@ -692,9 +733,55 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CTA SECTION (yang kamu minta) */}
+      <section className="mx-auto max-w-6xl px-6 pt-14">
+        <div data-reveal className="gpro-reveal">
+          <div
+            className="rounded-3xl p-8"
+            style={{
+              border: `1px solid ${border}`,
+              background: dark
+                ? `linear-gradient(135deg, rgba(208,7,5,0.10), rgba(11,11,16,1), rgba(125,180,206,0.10))`
+                : `linear-gradient(135deg, rgba(208,7,5,0.12), rgba(255,255,255,1), rgba(125,180,206,0.18))`,
+            }}
+          >
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-xs font-semibold" style={{ color: textSub }}>CTA</p>
+                <h3 className="mt-2 text-2xl font-extrabold" style={{ color: textMain }}>
+                  Butuh policy brief cepat yang rapi dan siap rapat?
+                </h3>
+                <ul className="mt-3 list-disc space-y-1 pl-5 text-sm" style={{ color: textSub }}>
+                  <li>Struktur jelas: masalah → opsi → rekomendasi → langkah eksekusi</li>
+                  <li>Visual pendukung (peta/infografik) untuk stakeholder</li>
+                  <li>Bahasa sederhana, mudah dipahami, siap dipakai</li>
+                </ul>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={BRAND.waUrl}
+                  className="gpro-shine inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+                  style={{ backgroundColor: COLORS.red }}
+                >
+                  Chat WA Sekarang
+                </a>
+                <button
+                  onClick={() => setOpenModal(true)}
+                  className="inline-flex items-center justify-center rounded-xl border px-6 py-3 text-sm font-semibold transition hover:-translate-y-0.5 hover:shadow-sm"
+                  style={{ borderColor: COLORS.blue, color: textMain, backgroundColor: card }}
+                >
+                  Ajukan Kolaborasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PORTOFOLIO */}
       <section id="portofolio" className="mx-auto max-w-6xl px-6 pt-14 scroll-mt-24">
-        <div className="gpro-reveal">
+        <div data-reveal className="gpro-reveal">
           <SectionTitle title="Portofolio" desc="Pilih kategori untuk melihat karya yang relevan." />
 
           <div className="flex flex-wrap gap-2">
@@ -721,20 +808,13 @@ export default function Home() {
             {filteredWorks.map((w) => (
               <div key={w.title} className="gpro-card rounded-2xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
                 <div className="flex items-start justify-between gap-3">
-                  <p className="text-sm font-bold" style={{ color: textMain }}>
-                    {w.title}
-                  </p>
-                  <span
-                    className="shrink-0 rounded-full border px-3 py-1 text-xs"
-                    style={{ borderColor: COLORS.blue, backgroundColor: `${COLORS.blue}12`, color: textMain }}
-                  >
+                  <p className="text-sm font-bold" style={{ color: textMain }}>{w.title}</p>
+                  <span className="shrink-0 rounded-full border px-3 py-1 text-xs" style={{ ...chipStyle, color: textMain }}>
                     {w.tag}
                   </span>
                 </div>
 
-                <p className="mt-2 text-sm" style={{ color: textSub }}>
-                  {w.summary}
-                </p>
+                <p className="mt-2 text-sm" style={{ color: textSub }}>{w.summary}</p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   {w.outputs.map((o) => (
@@ -753,9 +833,7 @@ export default function Home() {
                 </div>
 
                 <div className="mt-5 flex items-center justify-between">
-                  <span className="text-xs font-semibold" style={{ color: textSub }}>
-                    Kategori: {w.category}
-                  </span>
+                  <span className="text-xs font-semibold" style={{ color: textSub }}>Kategori: {w.category}</span>
                   <button className="text-sm font-semibold" style={{ color: COLORS.red }} onClick={() => setOpenModal(true)}>
                     Kolaborasi →
                   </button>
@@ -768,7 +846,7 @@ export default function Home() {
 
       {/* LAYANAN */}
       <section id="layanan" className="mx-auto max-w-6xl px-6 pt-14 scroll-mt-24">
-        <div className="gpro-reveal">
+        <div data-reveal className="gpro-reveal">
           <SectionTitle title="Layanan" desc="Format output yang biasa disiapkan untuk stakeholder dan kolaborator." />
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -779,12 +857,8 @@ export default function Home() {
               { t: "Deck Presentasi", d: "Materi presentasi profesional yang singkat, tajam, rapi." },
             ].map((x) => (
               <div key={x.t} className="gpro-card rounded-2xl p-6" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-                <p className="text-sm font-bold" style={{ color: textMain }}>
-                  {x.t}
-                </p>
-                <p className="mt-2 text-sm leading-6" style={{ color: textSub }}>
-                  {x.d}
-                </p>
+                <p className="text-sm font-bold" style={{ color: textMain }}>{x.t}</p>
+                <p className="mt-2 text-sm leading-6" style={{ color: textSub }}>{x.d}</p>
               </div>
             ))}
           </div>
@@ -793,11 +867,9 @@ export default function Home() {
 
       {/* KONTAK */}
       <section id="kontak" className="mx-auto max-w-6xl px-6 pb-16 pt-14 scroll-mt-24">
-        <div className="gpro-reveal">
+        <div data-reveal className="gpro-reveal">
           <div className="rounded-3xl p-8" style={{ border: `1px solid ${border}`, backgroundColor: card }}>
-            <h2 className="text-xl font-bold" style={{ color: textMain }}>
-              Ajukan kolaborasi
-            </h2>
+            <h2 className="text-xl font-bold" style={{ color: textMain }}>Ajukan kolaborasi</h2>
             <p className="mt-2 max-w-3xl text-sm" style={{ color: textSub }}>
               Klik tombol di bawah untuk mengisi form singkat. Setelah itu otomatis bisa terkirim ke WhatsApp.
             </p>
@@ -877,12 +949,8 @@ export default function Home() {
           <div className="relative w-full max-w-xl rounded-3xl p-6 shadow-2xl" style={{ backgroundColor: card, border: `1px solid ${border}` }}>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-sm font-semibold" style={{ color: textSub }}>
-                  Form Kolaborasi
-                </p>
-                <h3 className="mt-1 text-xl font-bold" style={{ color: textMain }}>
-                  Ajukan Kolaborasi
-                </h3>
+                <p className="text-sm font-semibold" style={{ color: textSub }}>Form Kolaborasi</p>
+                <h3 className="mt-1 text-xl font-bold" style={{ color: textMain }}>Ajukan Kolaborasi</h3>
                 <p className="mt-2 text-sm" style={{ color: textSub }}>
                   Isi singkat saja. Setelah itu klik <b>Kirim ke WhatsApp</b>.
                 </p>
@@ -971,9 +1039,7 @@ export default function Home() {
             </div>
 
             <div className="mt-5 rounded-2xl p-4" style={{ backgroundColor: `${COLORS.blue}${dark ? "10" : "14"}` }}>
-              <p className="text-xs font-semibold" style={{ color: textMain }}>
-                Catatan:
-              </p>
+              <p className="text-xs font-semibold" style={{ color: textMain }}>Catatan:</p>
               <p className="mt-1 text-xs" style={{ color: textSub }}>
                 Tutup modal: klik area gelap atau tekan <b>Esc</b>.
               </p>
