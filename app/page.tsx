@@ -352,6 +352,7 @@ export default function Home() {
           backgroundColor: dark ? "rgba(5,5,7,0.72)" : "rgba(255,255,255,0.84)",
           borderBottom: `1px solid ${border}`,
         }}
+        
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
@@ -405,6 +406,7 @@ export default function Home() {
             </button>
           </div>
         </div>
+        <h1>INI TULISAN EDWIN</h1>
       </header>
 
       {/* HERO */}
