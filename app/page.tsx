@@ -406,7 +406,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <h1>INI TULISAN EDWIN</h1>
       </header>
 
       {/* HERO */}
